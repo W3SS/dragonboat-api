@@ -9,15 +9,19 @@ app.use(bodyParser.json());
 
 var port = process.env.PORT || 8080;
 
-// Connect to database
-var uristring = process.env.MONGODB_URI
-
 var mongoose = require('mongoose');
-mongoose.connect(uristring, (err, res) => {
-  if (err)
+mongoose.connect(process.env.MONGODB_URI, (err, res) => {
+  if (err) {
     console.log('ERROR connecting to: ' + uristring + '. ' + err);
-  else
+    process.exit(1);
+  }
+  else {
     console.log('Succeeded connecting to: ' + uristring);
+
+    // START THE SERVER
+    app.listen(port);
+    console.log('App running on port ' + port);
+  }
 });
 
 var User = require('./app/models/user');
@@ -35,9 +39,3 @@ router.get('/', (req, res) => {
 // REGISTER OUR routes
 // all of our routes prefixed with /api
 app.use('/api', router);
-
-
-// START THE SERVER
-//
-app.listen(port);
-console.log('Magic happens on port ' + port);
