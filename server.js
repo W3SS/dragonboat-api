@@ -50,7 +50,16 @@ router.route('/users')
       message : 'User Created!'
     });
   });
-});
+})
+
+.get((req, res) => {
+  User.find((err, users) => {
+    if (err) {
+      res.send(err);
+    }
+    res.json(users);
+  })
+})
 
 // REGISTER OUR routes
 // all of our routes prefixed with /api
