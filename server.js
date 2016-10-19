@@ -11,7 +11,7 @@ var port = process.env.PORT || 8080;
 
 var mongoose = require('mongoose');
 
-mongoose.connect(process.env.MONGODB_URI, (err, res) => {
+mongoose.connect('mongodb://heroku_4svzbkbh:8s5a1ndhf23sokh4q2hmgest7m@ds041496.mlab.com:41496/heroku_4svzbkbh', (err, res) => {
   if (err) {
     console.log('ERROR connecting to: ' + process.env.MONGODB_URI + '. ' + err);
     process.exit(1);
